@@ -8,12 +8,15 @@
 # enter at the end of cue lines (sometimes in the cue scripts there isn't a real line break after cue)
 
 import docx
-# import gtts
+import sys
+import gtts
 import os
 #import pyttsx3
 from tkinter import *
 from tkinter import filedialog
 import tkinter.scrolledtext as scrolledtext
+
+from playsound import playsound
 
 class CueLineReader:
 
@@ -171,7 +174,13 @@ class CueLineReader:
 
     def say_text(self, text):
         """Given text to say, says it with built in os say function"""
-        os.system("/usr/bin/say" + " " + text)
+        # if sys.platform.startswith("darw"):
+        #     os.system("/usr/bin/say" + " " + text)
+        # elif sys.platform.startswith("win"):
+        tts = gtts.gTTS(text)
+        tts.save("utter.mp3")
+        playsound("utter.mp3")
+
 
     def play_next(self, catcher=None, catcher2=None):
 
@@ -233,19 +242,19 @@ class CueLineReader:
 
         button_explore = Button(self.window,
                                 text="Browse Files",
-                                command=self.browseFiles)
+                                command=self.browseFiles, fg="black")
 
         button_exit = Button(self.window,
                              text="Exit",
-                             command=self.exit)
+                             command=self.exit, fg="black")
 
-        button_load = Button(self.window, text="Load Cues", command=self.load_cues)
+        button_load = Button(self.window, text="Load Cues", command=self.load_cues, fg="black")
 
-        button_next = Button(self.window, text="Next Cue (right arrow key)", command=self.play_next)
-        button_previous = Button(self.window, text="Previous Cue (left arrow key)", command=self.play_previous)
-        button_replay = Button(self.window, text="Replay Cue (spacebar)", command=self.replay)
-        button_jump_forward = Button(self.window, text="Jump Ahead (10 cues)", command=self.jump_forward)
-        button_jump_back = Button(self.window, text="Jump Back (10 cues)", command=self.jump_back)
+        button_next = Button(self.window, text="Next Cue (right arrow key)", command=self.play_next, fg="black")
+        button_previous = Button(self.window, text="Previous Cue (left arrow key)", command=self.play_previous, fg="black")
+        button_replay = Button(self.window, text="Replay Cue (spacebar)", command=self.replay, fg="black")
+        button_jump_forward = Button(self.window, text="Jump Ahead (10 cues)", command=self.jump_forward, fg="black")
+        button_jump_back = Button(self.window, text="Jump Back (10 cues)", command=self.jump_back, fg="black")
 
         #Here I bind the arrow keys to run cues
         self.window.bind('<Left>', self.play_previous)
