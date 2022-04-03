@@ -36,8 +36,8 @@ class CueLineReader:
                                          "open it with a document editor and use save as to save it as .docx)",
                                     #width=20, height=4,
                                     fg="blue")
-        self.cue_display = Text(self.window, width=25, height=3, bg="yellow", wrap="word")
-        self.line_display = scrolledtext.ScrolledText(self.window, width=70, height=12, bg="violet", wrap="word", font=("Courier", 15))
+        self.cue_display = Text(self.window, width=25, height=3, bg="yellow", wrap="word", fg="black")
+        self.line_display = scrolledtext.ScrolledText(self.window, width=70, height=12, bg="violet", wrap="word", font=("Courier", 15), fg="black")
         #self.engine = pyttsx3.init()
 
 
